@@ -9,8 +9,8 @@
 # Docker file for Jenkins
 #######################################################
 
-# Using parent image as penjdk:8-jdk-stretch
-FROM penjdk:8-jdk-stretch
+# Using parent image as openjdk:8-jdk-stretch
+FROM openjdk:8-jdk-stretch
 
 # Dockerfile Maintainer
 MAINTAINER Rolind Roy
