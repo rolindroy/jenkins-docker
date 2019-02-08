@@ -54,6 +54,8 @@ RUN curl -fsSL https://github.com/krallin/tini/releases/download/${TINI_VERSION}
 
 COPY init.groovy /usr/share/jenkins/ref/init.groovy.d/tcp-slave-agent-port.groovy
 COPY basic-security.groovy /usr/share/jenkins/ref/init.groovy.d/basic-security.groovy
+
+# Added plugin file
 COPY plugin.txt /usr/share/jenkins/ref/plugin.txt
 # jenkins version being bundled in this docker image
 ARG JENKINS_VERSION
@@ -92,4 +94,12 @@ COPY tini-shim.sh /bin/tini
 
 ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/jenkins.sh"]
 
-RUN /usr/local/bin/install-plugins.sh /usr/share/jenkins/ref/plugin.txt
+# RUN /usr/local/bin/install-plugins.sh /usr/share/jenkins/ref/plugin.txt
+
+RUN /usr/local/bin/install-plugins.sh `tr '\n' ' ' < /usr/share/jenkins/ref/plugin.txt`
+
+# jenkins-admin-user.groovy will creaet admin user with administrator previlage.
+# username :admin
+# password: admin
+COPY jenkins-admin-user.groovy /usr/share/jenkins/ref/init.groovy.d/jenkins-admin-user.groovy
+CMD ["/sbin/tini", "--", "/usr/local/bin/jenkins.sh"]
