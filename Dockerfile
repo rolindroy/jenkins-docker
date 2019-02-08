@@ -59,7 +59,7 @@ COPY basic-security.groovy /usr/share/jenkins/ref/init.groovy.d/basic-security.g
 COPY plugin.txt /usr/share/jenkins/ref/plugin.txt
 # jenkins version being bundled in this docker image
 ARG JENKINS_VERSION
-ENV JENKINS_VERSION ${JENKINS_VERSION:-2.150.2}
+ENV JENKINS_VERSION ${JENKINS_VERSION:-2.163}
 
 # jenkins.war checksum, download will be validated using it
 ARG JENKINS_SHA=fab70f4e209855e0806315cc419e0cbbbf1bd9b31c6f221f7702aa21145040f8
